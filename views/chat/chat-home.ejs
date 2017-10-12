@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+  <title><%= locals.title %> - Chat</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/font-awesome.css">
+  <link rel="stylesheet" href="/public/css/chatBubble.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/javascript/chat/chat-index.js"></script>
+  <style>
+      body { word-wrap:break-word; }
+
+      html,body{
+        overflow-x: hidden; 
+        background-color: whitesmoke;
+      }
+      .pagination a.active{
+        background-color: #544a4d;
+        color: white;
+      }
+  </style>
+</head>
+<body> 
+<%- include("../templates/navbar.ejs") %>
+<div class="container-fluid" style="padding: 0px;">
+  <div class="col-sm-12" style="padding: 0px;">
+    <img src="/public/images/cropped-banner2.jpg" class="img img-responsive" width=100%;><br>
+  </div>  
+
+  <div class="container-fluid" style="margin-bottom: 5%;">
+    <div class="row">
+      <div class="col-sm-3" style="background-color: white; color: #434547; padding:20px;">
+        <div>
+          <% 
+            var encodeSpaces = function(data){
+              var encodedData = encodeURI((data).replace(/\s/g , "-"));
+              return encodedData;
+            } 
+          %>
+
+          <h3>Chat Rooms</h3>
+          <table class="table">
+            <tbody>
+              <% chatrooms.forEach(function(rooms){%>
+                <tr>
+                  <td><a href="/chat/rooms/<%= encodeSpaces(rooms.chatroom) %>"><%= rooms.chatroom %></a></td>
+                </tr>
+              <%});%>
+            </tbody>
+          </table>
+        </div>  
+      </div>
+
+      <div class="col-sm-9">
+        <div class="jumbotron text-center"> <h2 class="text-primary">Welcome to Chat</h2>
+          <p>Pick a room and start chatting. </p>
+          <form action="/chat" method="get">
+            <div class="input-group col-sm-4 col-sm-offset-4">
+                <input type="text" class="form-control" placeholder="Search for a fitness chat room" name="search" id="search">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" type="button">Go!</button>
+                </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<!-- FOOTER -->
+<br>
+<%- include("../templates/footer.ejs") %>
+<!-- // END OF FOOTER --> 
+</body>
+</html>
