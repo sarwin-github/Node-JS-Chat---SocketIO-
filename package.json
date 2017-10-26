@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node index.js",
+    "start": "node index.js",
     "dev": "nodemon --exec node -r dotenv/config index.js"
   },
   "author": "Sherwin A. Dapito",
