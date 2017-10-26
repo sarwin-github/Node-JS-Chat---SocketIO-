@@ -9,7 +9,7 @@ let mongoConnectionLocal = {
 
 // Local connection
 let mongoConnectionOnline = {	
-	'url': `mongodb://${process.env.MLabDBUser}:${process.env.MLabDBPassword}@ds149724.mlab.com:49724/ChatProject`
+	'url': `mongodb://${process.env.MLabDBUser}:${process.env.MLabDBPassword}@ds145019.mlab.com:45019/chat-project`
 };
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
