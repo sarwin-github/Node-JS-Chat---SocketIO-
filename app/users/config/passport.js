@@ -20,6 +20,7 @@ passport.use('local.user.signup', new LocalStrategy({
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required.').notEmpty();
     req.checkBody('password', 'Password should atleast contain more than six characters.').isLength({min:6});
+    req.checkBody('confirmPassword', 'Password mismatched.').equals(req.body.password);
 
     // Validate Error
     let errors = req.validationErrors();

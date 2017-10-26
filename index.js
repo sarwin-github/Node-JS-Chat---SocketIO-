@@ -90,7 +90,9 @@ setRoutes.initializeRoutes(app);
 // Socket IO config
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 const chat = require('./app/chat/socket/chat.js');
+const chatIndex = require('./app/chat/socket/chat-index.js');
 chat.initializeSocketIO(io);
+chatIndex.initializeSocketIO(io);
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Set Error Handler

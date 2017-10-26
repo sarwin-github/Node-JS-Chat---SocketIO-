@@ -5,7 +5,8 @@ const ChatRoom = require('../model/chat-room');
 // This will get the chat room based on a parameter
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 module.exports.getChatHome = (req, res) => {
-	let query = ChatRoom.find({}).sort('chatroom');
+	let searchRoom = req.query.room;
+	let query = ChatRoom.find({'chatroom': new RegExp(searchRoom, "i")}).sort('chatroom');
 
 	query.exec((err, chatrooms) => {
 		if(err){
@@ -17,7 +18,8 @@ module.exports.getChatHome = (req, res) => {
 
 		res.render('chat/chat-home.ejs', 
 		{
-			chatrooms: chatrooms
+			chatrooms : chatrooms,
+			user      : !!req.user ? req.user.username : undefined
 		});
 	});
 };

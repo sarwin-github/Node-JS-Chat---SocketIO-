@@ -61,12 +61,11 @@ function displayChatHistory (chatData){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 socket.on('userlist', function(users){
   var dataList = '';
-  for(var i=0; i < users.length; i++){
-    if(users[i].room == room){
-      dataList += '<li style="font-size: 15px; color: #51d820;">' 
-        + decodeURI((users[i].username).replace(/\-/g , " "))  + '</li>';  
-    }    
-  }
+
+  users.forEach(function(item){
+    dataList += '<li style="font-size: 15px; color: #51d820;">' 
+      + decodeURI((item).replace(/\-/g , " "))  + '</li>';
+  });
 
   $('#connectedUserList').html(dataList);
 }); 
@@ -141,8 +140,8 @@ socket.on('disconnect', function(user){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 $(document).ready(function(){
   var name = $('#currentUser').val();
-  $('#welcomeMessage').append('<div class="text-center"><legend class="text-primary">Welcome to ' 
-    + room + ': ' + name + '</legend></div>');
+  $('#welcomeMessage').append('<div class="text-center"><h3>Welcome to ' 
+    + room + ': ' + name + '</h3></div>');
   socket.emit('connectedUser', name);
 });
  

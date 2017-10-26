@@ -11,8 +11,7 @@ module.exports.initializeSocketIO = io => {
 		room = socket.handshake.query;
 
 		let updateUserlist = () => {
-			console.log(userInRoom);
-			io.to(socket.room).emit('userlist', userInRoom);
+			io.to(socket.room).emit('userlist', Object.keys(connectedUsers));
 		};
 
 		// This will load chat from history to database
@@ -42,9 +41,10 @@ module.exports.initializeSocketIO = io => {
 
 		// On connect Join a room
 		socket.on('subscribe', room => {
+			userInRoom.push(connectedUsers[socket.username]);
+
 			socket.room = room;
 			socket.join(room); 
-			//Everytime you join a room load the chat history for the room you're in.
 		});
 
 		//everytime a user connect - flash it to screen
@@ -52,8 +52,9 @@ module.exports.initializeSocketIO = io => {
 			socket.username       = users;
 			connectedUsers[users] = users;
 
-			userInRoom.push({ username: users, room: socket.room });
-			console.log(userInRoom.map(val => val));
+
+			console.log('userInRoom: ' + userInRoom.map(val => val));
+			console.log(connectedUsers);
 
 			io.to(socket.room).emit('connectedUser', users);
 			io.to(socket.room).emit('subscribe', console.log(`\n${socket.username} has joined the room: ${socket.room}`));

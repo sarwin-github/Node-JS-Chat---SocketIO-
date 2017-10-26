@@ -17,21 +17,27 @@
   <style>
       html,body{
         overflow-x: hidden; 
-        background-color: whitesmoke;
+        background-color: grey;
       }
 
-      .foo {
-        max-height:600px;
-        overflow-y:scroll;
+
+
+      .setMaxHeightDiv {
+          height:100%;
+      }
+
+      .rightSideBar {
+        position: absolute;
+        bottom: 0;
       }
   </style>
 </head>
 <body> 
 <%- include("../templates/navbar.ejs") %>
 <div class="container-fluid" style="padding: 0px;">
-  <div class="container-fluid" style="margin-bottom: 5%;">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-3" style="background-color: white; color: #434547; padding:20px;">
+      <div class="col-sm-3" style="padding:20px;">
         <div>
           <% 
             var encodeSpaces = function(data){
@@ -39,71 +45,84 @@
               return encodedData;
             } 
           %>
-          <div id="connectedUserListTable">
-            <legend style="color:#434547;">Online Users</legend>
-            <ul id="connectedUserList"></ul>
+
+          <div style="padding: 0px;">
+            <div class="panel">
+              <div class="panel-heading" style="background-color: #282727; color: whitesmoke;"><h3>Chat Rooms</h3></div>
+              <div class="panel-body">
+                <table class="table">
+                <% chatrooms.forEach(function(rooms){%>
+                  <tr>
+                    <td><a href="/chat/rooms/<%= encodeSpaces(rooms.chatroom) %>"><%= rooms.chatroom %></a></td>
+                  </tr>
+                <%});%>
+                </table>
+              </div>
+            </div>     
           </div>
-          <h3>Chat Rooms</h3>
-          <table class="table">
-            <tbody>
-              <% chatrooms.forEach(function(rooms){%>
-                <tr>
-                  <td><a href="/chat/rooms/<%= encodeSpaces(rooms.chatroom) %>"><%= rooms.chatroom %></a></td>
-                </tr>
-              <%});%>
-            </tbody>
-          </table>
+        
+          <div class="panel panel-body">
+            <div id="connectedUserListTable">
+              <legend style="color:#434547;">Online Users</legend>
+              <ul id="connectedUserList"></ul>
+            </div>
+          </div>
+          
+          <div class="userData"></div>
+          <div class="panel panel-body">
+            <% if(user){%>
+            <input type="hidden" name="currentUser" id="currentUser" value="<%= user %>">
+            <%} else {%> 
+            <% randomNumber = Math.floor(Math.random() * (999 - 1 + 1)) + 1%>
+              <input type="hidden" name="currentUser" id="currentUser" value="GuestUser<%= randomNumber%>">
+            <%}%>
+
+            <div id="connectedUserListTable">
+              <h5 id="chatWith"><strong class="text-primary">Room:</strong> </h5>
+              <ul id="connectedUserList"></ul>
+            </div>
+
+            <div>
+              <table class="table">
+                <tbody id="connectedUser"></tbody>
+              </table>
+            </div>
+          </div>
         </div>  
       </div>
 
-      <div class="col-sm-7" style="background-color:#fffdf9;"><br>
-        <div class="panel" style="background-color:#fffdf9;">
-          <div class="panel-body"  style="padding-top: 0px;"> 
+      <div class="col-sm-8"><br>
+        <div class="panel">
+          <div class="panel-heading" style="color: white; background-color: #282727;">
             <div id="welcomeMessage"></div>
-            <div class="foo" id="messages" style="padding:20px; color: white"></div>
-            <span id="notifyUser"></span>
           </div>
-
-          <div class="panel-footer">
-            <form id="form" action="" onsubmit="return submitfunction();" > 
-              <div class="input-group">
-                <input type="hidden" id="user" value="" />
-                <input id="message" autocomplete="off" class="form-control" 
-                  onkeyup="notifyTyping();" placeholder="Type your message here.." />
-                <span class="input-group-btn"> 
-                  <button class="btn btn-primary" type="submit">Send</button>
-                </span>
+          <div class="panel-body">
+            <div> 
+              <div class="foo setMaxHeightDiv" id="messages" style="padding-left:20px; padding-right: 20px; color: white"></div><br>
+              <div class="text-center">
+                <span class="text-center" id="notifyUser"></span><hr>
               </div>
-            </form>
+              
+            </div>
+
+            <div class="panel-footer" style="padding: 0px;">
+              <form id="form" onsubmit="return submitfunction();" > 
+                <div class="input-group">
+                  <input type="hidden" id="user" value="" />
+                  <input id="message" autocomplete="off" class="form-control" 
+                    onkeyup="notifyTyping();" placeholder="Type your message here.." />
+                  <span class="input-group-btn"> 
+                    <button class="btn btn-primary" type="submit">Send</button>
+                  </span>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="col-sm-2" style="background-color: white; min-height: 200px;"><br>
-        <div class="userData"></div>
-        <div>
-          <% if(user){%>
-          <input type="hidden" name="currentUser" id="currentUser" value="<%= user %>">
-          <%} else {%> 
-          <% randomNumber = Math.floor(Math.random() * (999 - 1 + 1)) + 1%>
-            <input type="hidden" name="currentUser" id="currentUser" value="GuestUser<%= randomNumber%>">
-          <%}%>
-
-          <div id="connectedUserListTable" >
-            <h5 id="chatWith"><strong class="text-primary">Room:</strong> </h5>
-            <ul id="connectedUserList"></ul>
-          </div>
-
-          <div>
-            <table class="table">
-              <tbody id="connectedUser"></tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  
 </div>
 <!-- FOOTER -->
 <br>
