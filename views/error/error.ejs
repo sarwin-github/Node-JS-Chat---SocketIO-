@@ -4,8 +4,7 @@
   <title><%= locals.title %> - Error Page</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/style/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="/js/jquery.js"></script>
@@ -17,6 +16,7 @@
       html,body{
         overflow-x: hidden; 
         background-color: whitesmoke;
+        padding-top: 60px;
       }
       .pagination a.active{
         background-color: #544a4d;
@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-	<nav class="navbar nav navbar-default nav-BG" style="margin-bottom: 0px; border-radius: 0px;">
+	<nav class="navbar nav navbar-default nav-BG fixed-top" >
 	  <div class="container">
 	   	<div class="navbar-header">
 	    	<a class="navbar-brand" href="/">Error</a>
@@ -52,7 +52,7 @@
 	<br>
   <div class="container">
   	<div class="row">
-      <div class="panel panel-body">
+      <div class="card card-body">
         <div class="media">
           <div class="media-left">
             <img src="/public/images/134-512.png" class="media-object" width="150px;">
@@ -70,7 +70,7 @@
         </div>
         <div>
           <hr>
-          <pre><%= error.stack %></pre>
+          <pre  class="px-3"><%= error.stack %></pre>
         </div>
       </div>
   	</div>

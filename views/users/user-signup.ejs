@@ -5,8 +5,7 @@
   <title>User Registration</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/style/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="/js/jquery.js"></script>
@@ -15,7 +14,7 @@
     <style>
       html,body{
         overflow-x: hidden; 
-        background-color: gray;
+        background-color: whitesmoke;
       }
     </style>
 </head>
@@ -26,10 +25,10 @@
   	<div class="row">
        	<div class="col-sm-12">
          	<div>
-            <div class="col-sm-6 col-sm-offset-3 panel panel-body">
+            <div class="col-sm-6 offset-3 card card-body shadow-sm rounded">
               <h3>Create a new user <span class="pull-right" style="font-size: 15px;"><a href="/chat/home">Back to Chat Home</a></span></h3><hr>
               <% if(error.length > 0){ %>
-                <div class="alert alert-danger alert-dismissable fade in text-center" style="border-style: solid; border-width: 2px;">
+                <div class="alert alert-danger alert-dismissable text-center" style="border-style: solid; border-width: 2px;">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <% error.forEach(function(error){ %>
                       <%= error %><br>

@@ -4,10 +4,9 @@
   <title><%= locals.title %> - Chat</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/bootstrap.css">
   <link rel="stylesheet" href="/css/font-awesome.css">
   <link rel="stylesheet" href="/public/style/chatBubble.css">
+  <link rel="stylesheet" href="/public/style/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="/js/jquery.js"></script>
   <script src="/js/jquery.min.js"></script>
@@ -17,10 +16,8 @@
   <style>
       html,body{
         overflow-x: hidden; 
-        background-color: grey;
+        background-color: whitesmoke;
       }
-
-
 
       .setMaxHeightDiv {
           height:100%;
@@ -35,9 +32,9 @@
 <body> 
 <%- include("../templates/navbar.ejs") %>
 <div class="container-fluid" style="padding: 0px;">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-sm-3" style="padding:20px;">
+      <div class="col-md-3" style="padding:20px;">
         <div>
           <% 
             var encodeSpaces = function(data){
@@ -47,9 +44,9 @@
           %>
 
           <div style="padding: 0px;">
-            <div class="panel">
-              <div class="panel-heading" style="background-color: #282727; color: whitesmoke;"><h3>Chat Rooms</h3></div>
-              <div class="panel-body">
+            <div class="card shadow-sm rounded">
+              <div class="card-heading px-2 pl-3 py-3" ><h3 class="text-danger mt-3">Chat Rooms</h3></div>
+              <div class="card-body">
                 <table class="table">
                 <% chatrooms.forEach(function(rooms){%>
                   <tr>
@@ -61,15 +58,15 @@
             </div>     
           </div>
         
-          <div class="panel panel-body">
+          <div class="card card-body shadow-sm rounded">
             <div id="connectedUserListTable">
-              <legend style="color:#434547;">Online Users</legend>
+              <legend style="color:#434547;">All Online Users</legend>
               <ul id="connectedUserList"></ul>
             </div>
           </div>
           
           <div class="userData"></div>
-          <div class="panel panel-body">
+          <div class="card card-body shadow-sm rounded">
             <% if(user){%>
             <input type="hidden" name="currentUser" id="currentUser" value="<%= user %>">
             <%} else {%> 
@@ -78,7 +75,7 @@
             <%}%>
 
             <div id="connectedUserListTable">
-              <h5 id="chatWith"><strong class="text-primary">Room:</strong> </h5>
+              <h6 id="chatWith"><strong class="text-primary">Room:</strong> </h6>
               <ul id="connectedUserList"></ul>
             </div>
 
@@ -91,12 +88,12 @@
         </div>  
       </div>
 
-      <div class="col-sm-8"><br>
-        <div class="panel">
-          <div class="panel-heading" style="color: white; background-color: #282727;">
+      <div class="col-md-9"><br>
+        <div class="card shadow-sm rounded">
+          <div class="card-heading p-3" >
             <div id="welcomeMessage"></div>
           </div>
-          <div class="panel-body">
+          <div class="card-body">
             <div> 
               <div class="foo setMaxHeightDiv" id="messages" style="padding-left:20px; padding-right: 20px; color: white"></div><br>
               <div class="text-center">
@@ -105,7 +102,7 @@
               
             </div>
 
-            <div class="panel-footer" style="padding: 0px;">
+            <div class="card-footer" style="padding: 0px;">
               <form id="form" onsubmit="return submitfunction();" > 
                 <div class="input-group">
                   <input type="hidden" id="user" value="" />

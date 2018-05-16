@@ -4,8 +4,7 @@
   <title><%= locals.title %> - Home</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/style/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.css">
   <link rel="stylesheet" href="/public/css/chatBubble.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -18,7 +17,7 @@
       body { word-wrap:break-word; }
 
       html,body{
-        background-color: grey;
+        background-color: whitesmoke;
       }
 
       .pagination a.active{
@@ -30,10 +29,10 @@
 <body> 
 <%- include("../templates/navbar.ejs") %>
 <div class="container-fluid" style="padding: 0px;">
-  <div class="container-fluid">
+  <div class="container">
   <br>
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-md-3">
         <div>
           <% 
             var encodeSpaces = function(data){
@@ -43,9 +42,9 @@
           %>
 
           <div style="padding: 0px;">
-            <div class="panel">
-              <div class="panel-heading" style="background-color: #282727; color: whitesmoke;"><h3>Chat Rooms</h3></div>
-              <div class="panel-body">
+            <div class="card rounded shadow-sm">
+              <div class="card-heading px-2 py-3 pl-3"><h3 class="text-danger mt-3">Chat Rooms</h3></div>
+              <div class="card-body">
                 <table class="table">
                 <% chatrooms.forEach(function(rooms){%>
                   <tr>
@@ -57,7 +56,7 @@
             </div>     
           </div>
           
-          <div class="panel panel-body"> 
+          <div class="card card-body rounded shadow-sm"> 
             <div id="connectedUserListTable">
               <legend>Online Users</legend>
               <ul id="connectedUserList"></ul>
@@ -72,17 +71,20 @@
         </div>  
       </div>
 
-      <div class="col-sm-8">
-        <div class="panel panel-body text-center" style="padding: 5%;"> <h2 class="text-primary">Welcome to Chat</h2>
+      <div class="col-md-9">
+        <div class="card card-body text-center shadow-sm rounded" style="padding: 5%;"> <h1 class="text-primary">Welcome to Public Chat Application</h1><hr>
           <p>Pick a room and start chatting. </p>
           <form action="/chat/home" method="get">
-            <div class="input-group col-sm-4 col-sm-offset-4">
+            <div class="input-group col-md-6 offset-3">
                 <input type="text" class="form-control" placeholder="Search for a chat room" name="room" id="search">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-default" type="button">Go!</button>
                 </span>
             </div>
           </form>
+
+          <p class="pt-5 text-muted"><small>This is a sample chat application created using Socket.IO, Node, Express and MongoDB</small></p>
+
         </div>
       </div>
     </div>

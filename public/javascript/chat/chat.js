@@ -141,7 +141,7 @@ socket.on('disconnect', function(user){
 $(document).ready(function(){
   var name = $('#currentUser').val();
   $('#welcomeMessage').append('<div class="text-center"><h3>Welcome to ' 
-    + room + ': ' + name + '</h3></div>');
+    + room + ': ' + name + '</h3><hr></div>');
   socket.emit('connectedUser', name);
 });
  
